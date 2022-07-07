@@ -6,7 +6,9 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    [SerializeField] private float chaseRange = 10f;
+    [SerializeField] private float chaseRange = 5f;
+    [SerializeField] private float turnSpeed = 5f;
+    
     private NavMeshAgent navMeshAgent;
     private float distanceToTarget = Mathf.Infinity;
     private bool isProvoked = false;
@@ -25,6 +27,7 @@ public class EnemyAI : MonoBehaviour
 
     private void EngageTarget()
     {
+        FaceTarget();
         if (navMeshAgent.stoppingDistance <= distanceToTarget) ChaseTarget();
         if (distanceToTarget <= navMeshAgent.stoppingDistance) AttackTarget();
         
@@ -32,12 +35,21 @@ public class EnemyAI : MonoBehaviour
 
     private void ChaseTarget()
     {
+        GetComponent<Animator>().SetBool("attack", false);
+        GetComponent<Animator>().SetTrigger("move");
         navMeshAgent.SetDestination(target.position);
     }
     
     private void AttackTarget()
     {
-        Debug.Log(name + " has seeked and destroying " + target.name);
+        GetComponent<Animator>().SetBool("attack", true);
+    }
+  
+    private void FaceTarget()
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
     }
 
     private void OnDrawGizmosSelected()
