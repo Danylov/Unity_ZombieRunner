@@ -315,8 +315,25 @@ PrefabInstance:
       propertyPath: fpsCamera
       value: 
       objectReference: {fileID: 44375165}
+    - target: {fileID: 4035935099272815957, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 3}
+      propertyPath: ammoSlot
+      value: 
+      objectReference: {fileID: 44375164}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}
+--- !u!114 &44375164 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6992380226058862271, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+    type: 3}
+  m_PrefabInstance: {fileID: 44375163}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e7800f3af06f3e428a82770a73a4fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &44375165 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 2000000, guid: c6453f8e1f814744d8b94e5a6d1f9942,
