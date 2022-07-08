@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3614249443508621660}
   - component: {fileID: 113037269559750531}
   m_Layer: 0
-  m_Name: Muzzle Flash - Orange
+  m_Name: Muzzle Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

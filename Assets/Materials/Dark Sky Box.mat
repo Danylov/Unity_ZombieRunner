@@ -55,9 +55,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
     m_Floats:
-    - _AtmosphereThickness: 0.5
+    - _AtmosphereThickness: 0.49
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -81,6 +80,5 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GroundColor: {r: 0.0492613, g: 0.066029854, b: 0.254717, a: 1}
-    - _SkyTint: {r: 0.09220363, g: 0.15479282, b: 0.5283019, a: 1}
-  m_BuildTextureStacks: []
+    - _GroundColor: {r: 0.05873977, g: 0.123207144, b: 0.2264151, a: 1}
+    - _SkyTint: {r: 0.071021706, g: 0.0884774, b: 0.26415092, a: 1}
