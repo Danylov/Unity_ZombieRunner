@@ -9,6 +9,6 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         hitPoints -= damage;
-        if (hitPoints <= 0f) Debug.Log("You dead, my glip glop.");
+        if (hitPoints <= 0f) GetComponent<DeathHandler>().HandleDeath();
     }
 }
