@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 2337074159000356742}
   - component: {fileID: 2337074158999389510}
   - component: {fileID: 662771257319246771}
+  - component: {fileID: 780942681494615299}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -357,6 +358,24 @@ MonoBehaviour:
   ammoSlot: {fileID: 0}
   ammoType: 1
   timeBetweenShots: 2
+--- !u!114 &780942681494615299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2337074158997199750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b61a56801799742ba31d6f0afcf5bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fpsCamera: {fileID: 0}
+  fpsController: {fileID: 0}
+  zoomedOutFOV: 60
+  zoomedInFOV: 20
+  zoomOutSensitivity: 2
+  zoomInSensitivity: 0.5
 --- !u!1 &2337074158997199752
 GameObject:
   m_ObjectHideFlags: 0
