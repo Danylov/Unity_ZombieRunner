@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6b28c7acf48d44d428f713321495bd02
+guid: 7b32d395a3a62a24eb63c5cea70584d0
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,6 +8,7 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
+  fontName: Zombie
   fontNames:
   - Zombie
   fallbackFontReferences: []

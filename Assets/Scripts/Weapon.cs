@@ -1,35 +1,38 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private Camera FPCamera;
-    [SerializeField] private float range = 100f;
-    [SerializeField] private float damage = 30f;
-    [SerializeField] private ParticleSystem  muzzleFlash;
-    [SerializeField] private GameObject  hitEffect;
-    [SerializeField] private Ammo  ammoSlot;
-    [SerializeField] private AmmoType  ammoType;
+    [SerializeField] Camera FPCamera;
+    [SerializeField] float range = 100f;
+    [SerializeField] float damage = 30f;
+    [SerializeField] ParticleSystem muzzleFlash;
+    [SerializeField] GameObject hitEffect;
+    [SerializeField] Ammo ammoSlot;
+    [SerializeField] AmmoType ammoType;
     [SerializeField] float timeBetweenShots = 0.5f;
 
-    private bool canShoot = true;
+    bool canShoot = true;
 
     private void OnEnable()
     {
         canShoot = true;
     }
 
-    private void Update()
+    void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.LeftControl) || Input.GetMouseButtonDown(0)) && canShoot)  StartCoroutine(Shoot());
+        if (Input.GetMouseButtonDown(0) && canShoot == true)
+        {
+            StartCoroutine(Shoot());
+        }
     }
-    
+
     IEnumerator Shoot()
     {
         canShoot = false;
-        if (0 < ammoSlot.GetCurrentAmmo(ammoType)) 
+        if (ammoSlot.GetCurrentAmmo(ammoType) > 0)
         {
             PlayMuzzleFlash();
             ProcessRaycast();
@@ -39,10 +42,11 @@ public class Weapon : MonoBehaviour
         canShoot = true;
     }
 
-    void PlayMuzzleFlash()
+    private void PlayMuzzleFlash()
     {
         muzzleFlash.Play();
     }
+
     private void ProcessRaycast()
     {
         RaycastHit hit;
@@ -53,10 +57,13 @@ public class Weapon : MonoBehaviour
             if (target == null) return;
             target.TakeDamage(damage);
         }
-        else return;
+        else
+        {
+            return;
+        }
     }
 
-    void CreateHitImpact(RaycastHit hit)
+    private void CreateHitImpact(RaycastHit hit)
     {
         GameObject impact = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(impact, .1f);

@@ -1,35 +1,41 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private float chaseRange = 5f;
-    [SerializeField] private float turnSpeed = 5f;
-    
-    private NavMeshAgent navMeshAgent;
-    private EnemyHealth enemyHealth;
-    private float distanceToTarget = Mathf.Infinity;
-    private bool isProvoked = false;
+    [SerializeField] Transform target;
+    [SerializeField] float chaseRange = 5f;
+    [SerializeField] float turnSpeed = 5f;
 
-    private void Start()
+    NavMeshAgent navMeshAgent;
+    float distanceToTarget = Mathf.Infinity;
+    bool isProvoked = false;
+    EnemyHealth health;
+    
+    void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        enemyHealth = GetComponent<EnemyHealth>();
+        health = GetComponent<EnemyHealth>();
     }
 
-    private void Update()
+    void Update()
     {
-        if (enemyHealth.IsDead)
+        if (health.IsDead())
         {
             enabled = false;
             navMeshAgent.enabled = false;
         }
         distanceToTarget = Vector3.Distance(target.position, transform.position);
-        if (isProvoked) EngageTarget();
-        else if (distanceToTarget <= chaseRange)  isProvoked = true;
+        if (isProvoked)
+        {
+            EngageTarget();
+        }
+        else if (distanceToTarget <= chaseRange)
+        {
+            isProvoked = true;
+        }
     }
 
     public void OnDamageTaken()
@@ -40,9 +46,15 @@ public class EnemyAI : MonoBehaviour
     private void EngageTarget()
     {
         FaceTarget();
-        if (navMeshAgent.stoppingDistance <= distanceToTarget) ChaseTarget();
-        if (distanceToTarget <= navMeshAgent.stoppingDistance) AttackTarget();
-        
+        if (distanceToTarget >= navMeshAgent.stoppingDistance)
+        {
+            ChaseTarget();
+        }
+
+        if (distanceToTarget <= navMeshAgent.stoppingDistance)
+        {
+            AttackTarget();
+        }
     }
 
     private void ChaseTarget()
@@ -51,12 +63,12 @@ public class EnemyAI : MonoBehaviour
         GetComponent<Animator>().SetTrigger("move");
         navMeshAgent.SetDestination(target.position);
     }
-    
+
     private void AttackTarget()
     {
         GetComponent<Animator>().SetBool("attack", true);
     }
-  
+
     private void FaceTarget()
     {
         Vector3 direction = (target.position - transform.position).normalized;
@@ -64,7 +76,7 @@ public class EnemyAI : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
     }
 
-    private void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, chaseRange);
