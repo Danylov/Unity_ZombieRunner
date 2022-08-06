@@ -4,22 +4,27 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-   [SerializeField] private float hitPoints = 100f;
+    [SerializeField] private float hitPoints = 100f;
 
-   private bool isDead = false;
-   public bool IsDead { get => isDead; }
+    private bool isDead;
 
-   public void TakeDamage(float damage)
-   {
-      BroadcastMessage("OnDamageTaken");
-      hitPoints -= damage;
-      if (hitPoints <= 0f) Die();
-   }
+    public bool IsDead => isDead;
 
-   private void Die()
-   {
-      if (isDead) return;
-      isDead = true;
-      GetComponent<Animator>().SetTrigger("die");
-   }
+    public void TakeDamage(float damage)
+    {
+        BroadcastMessage("OnDamageTaken");
+        hitPoints -= damage;
+        if (hitPoints <= 0f) Die();
+    }
+
+    private void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+        GetComponent<Animator>().SetTrigger("die");
+        if (name == "Enemy (2)") { // Отладка
+            Debug.Log("Die(): enemy.name =" + name); // Отладка
+            Debug.Log("Die(): enemyHealth.IsDead =" + IsDead); // Отладка
+        } // Отладка
+    }
 }

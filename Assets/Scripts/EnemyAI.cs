@@ -23,14 +23,30 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        distanceToTarget = Vector3.Distance(target.position, transform.position);
+
         if (enemyHealth.IsDead)
         {
+            if (name == "Enemy (2)") { // Отладка
+                Debug.Log("Update(): enemy.name =" + name); // Отладка
+                Debug.Log("Update(): enemyHealth.IsDead =" + enemyHealth.IsDead); // Отладка
+            } // Отладка
             enabled = false;
-            navMeshAgent.enabled = false;
+            // navMeshAgent.enabled = false;
+            navMeshAgent.isStopped = true;
         }
-        distanceToTarget = Vector3.Distance(target.position, transform.position);
-        if (isProvoked) EngageTarget();
-        else if (distanceToTarget <= chaseRange)  isProvoked = true;
+        else
+        {
+            if (isProvoked)
+            {
+                EngageTarget();
+            }
+            else if (distanceToTarget <= chaseRange)
+            {
+                isProvoked = true;
+                // ChaseTarget();
+            }
+        }
     }
 
     public void OnDamageTaken()
@@ -50,7 +66,11 @@ public class EnemyAI : MonoBehaviour
     {
         GetComponent<Animator>().SetBool("attack", false);
         GetComponent<Animator>().SetTrigger("move");
-        if (navMeshAgent.enabled)  navMeshAgent.SetDestination(target.position);
+        if (name == "Enemy (2)") { // Отладка
+            Debug.Log("ChaseTarget(): enemy.name =" + name); // Отладка
+            Debug.Log("ChaseTarget(): enemyHealth.IsDead =" + enemyHealth.IsDead); // Отладка
+        } // Отладка
+        navMeshAgent.SetDestination(target.position);
     }
     
     private void AttackTarget()
